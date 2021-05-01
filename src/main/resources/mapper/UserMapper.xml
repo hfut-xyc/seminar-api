@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.api.seminar.mapper.UserMapper">
+
+
+  <select id="getUserByUsername" resultType="com.api.seminar.entity.User">
+      select username, password from `user` where username=#{username}
+  </select>
+
+  <insert id="insertUserCity">
+    insert into user_city values(uid, cid)
+  </insert>
+
+  <insert id="insertUserSubject">
+    insert into user_subject values(uid, sid)
+  </insert>
+
+  <insert id="insertUserReport">
+    insert into user_report values(uid, rid)
+  </insert>
+</mapper>

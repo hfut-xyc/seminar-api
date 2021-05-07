@@ -2,12 +2,29 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.api.seminar.mapper.UserMapper">
-
+<mapper namespace="com.api.seminar.dao.UserMapper">
 
   <select id="getUserByUsername" resultType="com.api.seminar.entity.User">
-      select username, password from `user` where username=#{username}
+    select username, password from user where username = #{username}
   </select>
+
+  <select id="listUserReport" resultType="com.api.seminar.entity.Report">
+    select r.id, title, speaker, time, location
+    from user_report ur, report r
+    where ur.rid=r.id and uid=#{uid};
+  </select>
+
+  <select id="listUserCity" resultType="java.lang.Integer">
+    select cid from user_city where uid=#{uid}
+  </select>
+
+  <select id="listUserSubject" resultType="java.lang.Integer">
+    select sid from user_subject where uid=#{uid}
+  </select>
+
+  <insert id="insertUserReport">
+    insert into user_report(uid, rid) values(#{uid}, #{rid})
+  </insert>
 
   <insert id="insertUserCity">
     insert into user_city values(uid, cid)
@@ -17,7 +34,15 @@
     insert into user_subject values(uid, sid)
   </insert>
 
-  <insert id="insertUserReport">
-    insert into user_report values(uid, rid)
-  </insert>
+  <delete id="deleteUserReport">
+    delete from user_report where uid=#{uid} and rid=#{rid}
+  </delete>
+
+  <delete id="deleteUserCity">
+    delete from user_city where uid=#{uid}
+  </delete>
+
+  <delete id="deleteUserSubject">
+    delete from user_subject where uid=#{uid}
+  </delete>
 </mapper>

@@ -2,7 +2,10 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.api.seminar.mapper.ReportMapper">
+<mapper namespace="com.api.seminar.dao.ReportMapper">
 
-
+  <insert id="insertReport">
+    insert into report(title, speaker, time, location, cid, sid)
+    values (#{title}, #{speaker}, #{time}, #{location}, #{cid}, #{sid})
+  </insert>
 </mapper>

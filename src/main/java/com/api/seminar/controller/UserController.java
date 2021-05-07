@@ -15,6 +15,12 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @GetMapping("user/{uid}/report/{rid}")
+    public CommonResponse<Integer> getUserReport(@PathVariable Integer uid, @PathVariable Integer rid) {
+        Integer id = userService.getUserReport(uid, rid);
+        return CommonResponse.success("success", id);
+    }
+
     @GetMapping("user/{uid}/report/fav")
     public CommonResponse<List<Report>> listFavReport(@PathVariable Integer uid) {
         List<Report> reportList = userService.listUserReport(uid);

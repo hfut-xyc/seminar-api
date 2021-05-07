@@ -14,6 +14,10 @@
     where ur.rid=r.id and uid=#{uid};
   </select>
 
+  <select id="getUserReport" resultType="java.lang.Integer">
+    select id from user_report where uid=#{uid} and rid=#{rid}
+  </select>
+
   <select id="listUserCity" resultType="java.lang.Integer">
     select cid from user_city where uid=#{uid}
   </select>
@@ -22,16 +26,18 @@
     select sid from user_subject where uid=#{uid}
   </select>
 
+
+
   <insert id="insertUserReport">
-    insert into user_report(uid, rid) values(#{uid}, #{rid})
+    insert ignore into user_report(uid, rid) values(#{uid}, #{rid})
   </insert>
 
   <insert id="insertUserCity">
-    insert into user_city values(uid, cid)
+    insert ignore into user_city values(uid, cid)
   </insert>
 
   <insert id="insertUserSubject">
-    insert into user_subject values(uid, sid)
+    insert ignore into user_subject values(uid, sid)
   </insert>
 
   <delete id="deleteUserReport">

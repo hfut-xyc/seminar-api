@@ -8,4 +8,8 @@
     insert into report(title, speaker, time, location, cid, sid)
     values (#{title}, #{speaker}, #{time}, #{location}, #{cid}, #{sid})
   </insert>
+
+  <select id="listReport" resultType="com.api.seminar.entity.Report">
+    select id, title, speaker, time, location from report
+  </select>
 </mapper>

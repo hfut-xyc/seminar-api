@@ -13,6 +13,8 @@ public interface UserMapper {
 
     List<Report> listUserReport(@Param("uid") Integer uid);
 
+    Integer getUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
+
     List<Integer> listUserCity(@Param("uid") Integer uid);
 
     List<Integer> listUserSubject(@Param("uid") Integer uid);

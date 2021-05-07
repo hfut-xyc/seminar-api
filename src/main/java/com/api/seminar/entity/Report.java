@@ -1,9 +1,6 @@
 package com.api.seminar.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class Report {
@@ -16,8 +13,7 @@ public class Report {
 
     private String location;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone = "UTC+8")
-    private Date time;
+    private String time;
 
     private Integer cid;
 

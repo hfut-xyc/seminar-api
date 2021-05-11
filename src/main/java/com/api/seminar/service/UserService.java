@@ -18,6 +18,14 @@ public class UserService {
         return userMapper.listUserReport(uid);
     }
 
+    public List<Integer> listUserCity(Integer uid) {
+        return userMapper.listUserCity(uid);
+    }
+
+    public List<Integer> listUserSubject(Integer uid) {
+        return userMapper.listUserSubject(uid);
+    }
+
     public Integer getUserReport(Integer uid, Integer rid) {
         return userMapper.getUserReport(uid, rid);
     }
@@ -30,16 +38,16 @@ public class UserService {
         return res;
     }
 
-    public int insertUserCity(Integer uid, List<Integer> cids) throws CommonException {
-        int res = userMapper.insertUserCity(uid, cids);
+    public int insertUserCity(Integer uid, Integer cid) throws CommonException {
+        int res = userMapper.insertUserCity(uid, cid);
         if (res == 0) {
             throw new CommonException("关注失败");
         }
         return res;
     }
 
-    public int insertUserSubject(Integer uid, List<Integer> sids) throws CommonException {
-        int res = userMapper.insertUserSubject(uid, sids);
+    public int insertUserSubject(Integer uid, Integer sid) throws CommonException {
+        int res = userMapper.insertUserSubject(uid, sid);
         if (res == 0) {
             throw new CommonException("关注失败");
         }
@@ -54,18 +62,18 @@ public class UserService {
         return res;
     }
 
-    public int deleteUserCity(Integer uid)  throws CommonException{
-        int res = userMapper.deleteUserCity(uid);
+    public int deleteUserCity(Integer uid, Integer cid)  throws CommonException{
+        int res = userMapper.deleteUserCity(uid, cid);
         if (res == 0) {
-            throw new CommonException("关注失败");
+            throw new CommonException("取消关注失败");
         }
         return res;
     }
 
-    public int deleteUserSubject(Integer uid)  throws CommonException{
-        int res = userMapper.deleteUserSubject(uid);
+    public int deleteUserSubject(Integer uid, Integer sid)  throws CommonException{
+        int res = userMapper.deleteUserSubject(uid, sid);
         if (res == 0) {
-            throw new CommonException("关注失败");
+            throw new CommonException("取消关注失败");
         }
         return res;
     }

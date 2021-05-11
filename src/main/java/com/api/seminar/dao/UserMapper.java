@@ -11,9 +11,9 @@ public interface UserMapper {
 
     User getUserByUsername(String username);
 
-    List<Report> listUserReport(@Param("uid") Integer uid);
-
     Integer getUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
+
+    List<Report> listUserReport(@Param("uid") Integer uid);
 
     List<Integer> listUserCity(@Param("uid") Integer uid);
 
@@ -21,13 +21,13 @@ public interface UserMapper {
 
     int insertUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
 
-    int insertUserCity(@Param("uid") Integer uid, @Param("cid") List<Integer> cids);
+    int insertUserCity(@Param("uid") Integer uid, @Param("cid") Integer cid);
 
-    int insertUserSubject(@Param("uid") Integer uid, @Param("sid") List<Integer> sids);
+    int insertUserSubject(@Param("uid") Integer uid, @Param("sid") Integer sid);
 
     int deleteUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
 
-    int deleteUserCity(@Param("uid") Integer uid);
+    int deleteUserCity(@Param("uid") Integer uid, @Param("cid") Integer cid);
 
-    int deleteUserSubject(@Param("uid") Integer uid);
+    int deleteUserSubject(@Param("uid") Integer uid, @Param("sid") Integer sid);
 }

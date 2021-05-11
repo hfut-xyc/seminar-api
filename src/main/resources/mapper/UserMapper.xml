@@ -8,14 +8,14 @@
     select username, password from user where username = #{username}
   </select>
 
+  <select id="getUserReport" resultType="java.lang.Integer">
+    select id from user_report where uid=#{uid} and rid=#{rid}
+  </select>
+
   <select id="listUserReport" resultType="com.api.seminar.entity.Report">
     select r.id, title, speaker, time, location
     from user_report ur, report r
     where ur.rid=r.id and uid=#{uid};
-  </select>
-
-  <select id="getUserReport" resultType="java.lang.Integer">
-    select id from user_report where uid=#{uid} and rid=#{rid}
   </select>
 
   <select id="listUserCity" resultType="java.lang.Integer">
@@ -26,18 +26,16 @@
     select sid from user_subject where uid=#{uid}
   </select>
 
-
-
   <insert id="insertUserReport">
     insert ignore into user_report(uid, rid) values(#{uid}, #{rid})
   </insert>
 
   <insert id="insertUserCity">
-    insert ignore into user_city values(uid, cid)
+    insert ignore into user_city(uid, cid) values(#{uid}, #{cid})
   </insert>
 
   <insert id="insertUserSubject">
-    insert ignore into user_subject values(uid, sid)
+    insert ignore into user_subject(uid, sid) values(#{uid}, #{sid})
   </insert>
 
   <delete id="deleteUserReport">
@@ -45,10 +43,10 @@
   </delete>
 
   <delete id="deleteUserCity">
-    delete from user_city where uid=#{uid}
+    delete from user_city where uid=#{uid} and cid=#{cid}
   </delete>
 
   <delete id="deleteUserSubject">
-    delete from user_subject where uid=#{uid}
+    delete from user_subject where uid=#{uid} and sid=#{sid}
   </delete>
 </mapper>

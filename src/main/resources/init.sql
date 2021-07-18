@@ -14,8 +14,8 @@ CREATE TABLE `user` (
   UNIQUE key uk_username(`username`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
 
-INSERT INTO `user` VALUES (1, 'admin', 'admin', '11111@qq.com');
-INSERT INTO `user` VALUES (2, 'xxx', 'xxx', '22222@qq.com');
+insert into user(username, password, email) values ('admin', '$2a$10$1X8bXToh5IrujFA/HlQPUOjlIdHv19W47FJnXfjY3bqA.lwi/xSDC', '15141241345');
+insert into user(username, password, email) values ('xyc', '$2a$10$JQSlh37uN3Tn96I1dPZYc.Qz59vnIoqXZe/bAqLq4tIO3gsVuMUYW', '151121231');
 
 
 -- ----------------------------

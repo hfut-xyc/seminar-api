@@ -3,16 +3,24 @@ package com.api.seminar.service;
 import com.api.seminar.dao.UserMapper;
 import com.api.seminar.entity.Report;
 import com.api.seminar.exception.CommonException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userMapper.getUserByUsername(username);
+    }
 
     public List<Report> listUserReport(Integer uid) {
         return userMapper.listUserReport(uid);
@@ -77,5 +85,4 @@ public class UserService {
         }
         return res;
     }
-
 }

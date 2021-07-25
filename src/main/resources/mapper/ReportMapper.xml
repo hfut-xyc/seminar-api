@@ -4,12 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.api.seminar.dao.ReportMapper">
 
+  <select id="listReport" resultType="com.api.seminar.entity.Report">
+    select id, title, speaker, time, location, view
+    from report where 1=1
+    <if test="cid != null">
+      and cid=#{cid}
+    </if>
+    <if test="sid != null">
+      and sid=#{sid}
+    </if>
+  </select>
+
   <insert id="insertReport">
     insert into report(title, speaker, time, location, cid, sid)
     values (#{title}, #{speaker}, #{time}, #{location}, #{cid}, #{sid})
   </insert>
-
-  <select id="listReport" resultType="com.api.seminar.entity.Report">
-    select id, title, speaker, time, location from report
-  </select>
 </mapper>

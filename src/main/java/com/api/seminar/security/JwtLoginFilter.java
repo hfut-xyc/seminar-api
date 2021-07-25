@@ -36,7 +36,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User) authResult.getPrincipal();
-        String token = JwtUtils.createToken(user, null, false);
+        String token = JwtUtils.createToken(user, null, true);
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         out.write("Bearer " + token);

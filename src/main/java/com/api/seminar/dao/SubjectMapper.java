@@ -6,5 +6,8 @@ import java.util.List;
 
 public interface SubjectMapper {
 
-    List<Subject> listSubject();
+    List<Subject> listAllSubject();
+
+    List<Subject> listSecondarySubject();
+
 }

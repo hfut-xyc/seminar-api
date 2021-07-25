@@ -22,6 +22,7 @@ public class UserController {
         return CommonResponse.success("查询成功", authentication.getPrincipal());
     }
 
+    // 查询用户uid是否收藏报告rid
     @GetMapping("/{uid}/report/{rid}")
     public CommonResponse<Integer> getUserReport(@PathVariable Integer uid, @PathVariable Integer rid) {
         Integer id = userService.getUserReport(uid, rid);

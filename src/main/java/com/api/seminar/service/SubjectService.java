@@ -13,7 +13,11 @@ public class SubjectService {
     @Resource
     private SubjectMapper subjectMapper;
 
-    public List<Subject> listSubject() {
-        return subjectMapper.listSubject();
+    public List<Subject> listSubject(Integer type) {
+        if (type == 1) {
+            return subjectMapper.listAllSubject();
+        } else {
+            return subjectMapper.listSecondarySubject();
+        }
     }
 }

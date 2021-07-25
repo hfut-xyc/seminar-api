@@ -11,9 +11,13 @@ public class Report {
 
     private String speaker;
 
+    private String time;
+
     private String location;
 
-    private String time;
+    private String introduction;
+
+    private Integer view;
 
     private Integer cid;
 

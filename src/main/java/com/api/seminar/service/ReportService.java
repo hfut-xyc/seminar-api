@@ -13,7 +13,7 @@ public class ReportService {
     @Resource
     private ReportMapper reportMapper;
 
-    public List<Report> listReport() {
-        return reportMapper.listReport();
+    public List<Report> listReport(Integer cid, Integer sid) {
+        return reportMapper.listReport(cid, sid);
     }
 }

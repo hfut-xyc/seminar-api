@@ -26,6 +26,10 @@
     select sid from user_subject where uid=#{uid}
   </select>
 
+  <insert id="insertUser">
+    insert ignore into user(username, password) values(#{username}, #{password})
+  </insert>
+
   <insert id="insertUserReport">
     insert ignore into user_report(uid, rid) values(#{uid}, #{rid})
   </insert>

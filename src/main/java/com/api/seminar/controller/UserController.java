@@ -2,6 +2,7 @@ package com.api.seminar.controller;
 
 import com.api.seminar.dto.CommonResponse;
 import com.api.seminar.entity.Report;
+import com.api.seminar.entity.User;
 import com.api.seminar.exception.CommonException;
 import com.api.seminar.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -22,7 +23,6 @@ public class UserController {
         return CommonResponse.success("查询成功", authentication.getPrincipal());
     }
 
-    // 查询用户uid是否收藏报告rid
     @GetMapping("/{uid}/report/{rid}")
     public CommonResponse<Integer> getUserReport(@PathVariable Integer uid, @PathVariable Integer rid) {
         Integer id = userService.getUserReport(uid, rid);
@@ -45,6 +45,12 @@ public class UserController {
     public CommonResponse<List<Integer>> listFavSubject(@PathVariable Integer uid) {
         List<Integer> subjectList = userService.listUserSubject(uid);
         return CommonResponse.success("查询成功", subjectList);
+    }
+
+    @PostMapping("/register")
+    public CommonResponse register(@RequestBody User user) throws CommonException {
+        int res = userService.insertUser(user);
+        return CommonResponse.success("注册成功");
     }
 
     @PostMapping("/{uid}/report/fav")

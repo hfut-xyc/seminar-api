@@ -2,10 +2,12 @@ package com.api.seminar.service;
 
 import com.api.seminar.dao.UserMapper;
 import com.api.seminar.entity.Report;
+import com.api.seminar.entity.User;
 import com.api.seminar.exception.CommonException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,9 +19,16 @@ public class UserService implements UserDetailsService {
     @Resource
     private UserMapper userMapper;
 
+    @Resource
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userMapper.getUserByUsername(username);
+    }
+
+    public Integer getUserReport(Integer uid, Integer rid) {
+        return userMapper.getUserReport(uid, rid);
     }
 
     public List<Report> listUserReport(Integer uid) {
@@ -34,8 +43,17 @@ public class UserService implements UserDetailsService {
         return userMapper.listUserSubject(uid);
     }
 
-    public Integer getUserReport(Integer uid, Integer rid) {
-        return userMapper.getUserReport(uid, rid);
+    public int insertUser(User user) throws CommonException {
+        UserDetails temp = loadUserByUsername(user.getUsername());
+        if (temp != null) {
+            throw new CommonException("用户名重复");
+        }
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        int res = userMapper.insertUser(user);
+        if (res == 0) {
+            throw new CommonException("注册失败");
+        }
+        return res;
     }
 
     public int insertUserReport(Integer uid, Integer rid) throws CommonException {

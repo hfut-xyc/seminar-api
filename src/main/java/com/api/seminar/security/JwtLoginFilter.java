@@ -1,5 +1,6 @@
 package com.api.seminar.security;
 
+import com.api.seminar.dto.CommonResponse;
 import com.api.seminar.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +17,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
+
+    private static ObjectMapper objectMapper = new ObjectMapper();
 
     public JwtLoginFilter(AuthenticationManager authenticationManager) {
         setAuthenticationManager(authenticationManager);
@@ -36,10 +39,11 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User) authResult.getPrincipal();
-        String token = JwtUtils.createToken(user, null, true);
+        String token = "Bearer " + JwtUtils.createToken(user, null, true);
+
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        out.write("Bearer " + token);
+        out.write(objectMapper.writeValueAsString(CommonResponse.success("登录成功", token)));
         out.flush();
         out.close();
     }
@@ -47,6 +51,9 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Bad Credentials");
+        PrintWriter out = response.getWriter();
+        out.write(objectMapper.writeValueAsString(CommonResponse.error("密码错误")));
+        out.flush();
+        out.close();
     }
 }

@@ -24,5 +24,10 @@ public class ReportController {
         return CommonResponse.success("刷新成功", reportList);
     }
 
+    @GetMapping("/hello")
+    public String hello() {
+        return "HelloWorld";
+    }
+
 }
 

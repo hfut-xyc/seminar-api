@@ -19,6 +19,8 @@ public interface UserMapper {
 
     List<Integer> listUserSubject(@Param("uid") Integer uid);
 
+    int insertUser(User user);
+
     int insertUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
 
     int insertUserCity(@Param("uid") Integer uid, @Param("cid") Integer cid);

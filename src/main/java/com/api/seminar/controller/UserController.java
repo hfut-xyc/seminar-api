@@ -23,10 +23,11 @@ public class UserController {
         return CommonResponse.success("查询成功", authentication.getPrincipal());
     }
 
-    @GetMapping("/{uid}/report/{rid}")
-    public CommonResponse<Integer> getUserReport(@PathVariable Integer uid, @PathVariable Integer rid) {
+    @GetMapping("/{uid}/report/collect")
+    public CommonResponse<Boolean> getUserReport(@PathVariable Integer uid, @RequestParam Integer rid) {
         Integer id = userService.getUserReport(uid, rid);
-        return CommonResponse.success("查询成功", id);
+        Boolean isCollected = id != null;
+        return CommonResponse.success("查询成功", isCollected);
     }
 
     @GetMapping("/{uid}/report/fav")

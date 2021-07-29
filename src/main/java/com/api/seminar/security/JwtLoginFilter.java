@@ -18,7 +18,7 @@ import java.io.PrintWriter;
 
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public JwtLoginFilter(AuthenticationManager authenticationManager) {
         setAuthenticationManager(authenticationManager);

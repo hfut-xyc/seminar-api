@@ -124,7 +124,7 @@ INSERT INTO `subject`(name, parent) VALUES ('操作系统', 2);
 INSERT INTO `subject`(name, parent) VALUES ('计算机网络', 2);
 INSERT INTO `subject`(name, parent) VALUES ('数据库', 2);
 INSERT INTO `subject`(name, parent) VALUES ('嵌入式系统', 2);
-, parent
+
 
 -- ----------------------------
 -- 5.Table structure for user_city

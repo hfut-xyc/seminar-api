@@ -22,19 +22,18 @@ public class JwtTokenFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String header = request.getHeader("Authorization");
-        if (header == null || !header.startsWith("Bearer ")) {
+        String token = request.getHeader("Authorization");
+        if (token == null) {
             chain.doFilter(request, response);
             return;
         }
-        SecurityContextHolder.getContext().setAuthentication(getAuthentication(header));
+        SecurityContextHolder.getContext().setAuthentication(getAuthentication(token));
         super.doFilterInternal(request, response, chain);
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(String header) {
-        String token = header.replace("Bearer ", "");
+    private UsernamePasswordAuthenticationToken getAuthentication(String token) {
         try {
-            Claims user = JwtUtils.getTokenBody(token);
+            Claims user = JwtUtils.parseToken(token);
             return new UsernamePasswordAuthenticationToken(user, null, null);
         } catch (Exception e) {
             log.error(e.getMessage());

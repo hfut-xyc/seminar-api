@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface ReportMapper {
 
-    List<Report> listReport(@Param("cid") Integer cid, @Param("sid") Integer sid);
+    List<Report> findByCidAndSid(@Param("cid") Integer cid, @Param("sid") Integer sid);
 
-    int insertReport(Report report);
+    Integer save(Report report);
 
 }

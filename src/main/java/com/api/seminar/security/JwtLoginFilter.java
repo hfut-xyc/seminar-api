@@ -1,7 +1,7 @@
 package com.api.seminar.security;
 
-import com.api.seminar.dto.CommonResponse;
 import com.api.seminar.entity.User;
+import com.api.seminar.vo.ResultVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -39,11 +39,12 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         User user = (User) authResult.getPrincipal();
-        String token = "Bearer " + JwtUtils.createToken(user, null, true);
+        String token = JwtUtils.createToken(user);
 
         response.setContentType("application/json;charset=utf-8");
+        ResultVO<String> result = new ResultVO<>(0, "登录成功", token);
         PrintWriter out = response.getWriter();
-        out.write(objectMapper.writeValueAsString(CommonResponse.success("登录成功", token)));
+        out.write(objectMapper.writeValueAsString(result));
         out.flush();
         out.close();
     }
@@ -51,8 +52,9 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
+        ResultVO<String> result = new ResultVO<>(0, "登录失败", null);
         PrintWriter out = response.getWriter();
-        out.write(objectMapper.writeValueAsString(CommonResponse.error("密码错误")));
+        out.write(objectMapper.writeValueAsString(result));
         out.flush();
         out.close();
     }

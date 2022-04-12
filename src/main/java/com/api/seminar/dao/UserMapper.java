@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserMapper {
 
-    User getUserByUsername(String username);
+    User findByUsername(String username);
 
     Integer getUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
 
@@ -19,7 +19,7 @@ public interface UserMapper {
 
     List<Integer> listUserSubject(@Param("uid") Integer uid);
 
-    int insertUser(User user);
+    int save(User user);
 
     int insertUserReport(@Param("uid") Integer uid, @Param("rid") Integer rid);
 

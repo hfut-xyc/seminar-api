@@ -2,6 +2,8 @@ package com.api.seminar.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Report {
 
@@ -22,4 +24,8 @@ public class Report {
     private Integer cid;
 
     private Integer sid;
+
+    private Date createTime;
+
+    private Date updateTime;
 }

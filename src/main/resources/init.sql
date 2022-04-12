@@ -6,13 +6,13 @@ use seminar;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(11) not null AUTO_INCREMENT COMMENT '用户id',
+  `id` int(11) not null auto_increment COMMENT '用户id',
   `username` varchar(255) not null COMMENT '用户名',
   `password` varchar(255) not null COMMENT '用户密码',
-  `email` varchar(255) DEFAULT NULL COMMENT '用户邮箱',
-  primary key (`id`) USING BTREE,
-  UNIQUE key uk_username(`username`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+  `email` varchar(255) default null COMMENT '用户邮箱',
+  primary key (`id`),
+  unique key uk_username(`username`) USING BTREE
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 insert into user(username, password, email) values ('admin', '$2a$10$1X8bXToh5IrujFA/HlQPUOjlIdHv19W47FJnXfjY3bqA.lwi/xSDC', '15141241345');
 insert into user(username, password, email) values ('xyc', '$2a$10$JQSlh37uN3Tn96I1dPZYc.Qz59vnIoqXZe/bAqLq4tIO3gsVuMUYW', '151121231');
@@ -23,7 +23,7 @@ insert into user(username, password, email) values ('xyc', '$2a$10$JQSlh37uN3Tn9
 -- ----------------------------
 DROP TABLE IF EXISTS report;
 CREATE TABLE report(
-  `id` int(11) not null AUTO_INCREMENT COMMENT '用户id',
+  `id` int(11) not null auto_increment COMMENT '用户id',
   `title` varchar(255) not null COMMENT '报告标题',
   `speaker` varchar(255) not null COMMENT '报告人',
   `time` varchar(255) not null COMMENT '报告时间',
@@ -32,9 +32,9 @@ CREATE TABLE report(
   `view` int(11) default 0 COMMENT '浏览量',
   `cid` int(11) default null COMMENT '所属城市',
   `sid` int(11) default null COMMENT '所属学科',
-  primary key (`id`) USING BTREE,
-  INDEX idx_title(`title`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+  primary key (`id`),
+  index idx_title(`title`) USING BTREE
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO report(title, speaker, time, location, cid, sid) VALUES ('工业场景下的隐私保护机器学习', '吴秉哲 苹果学者', '2021-04-24 19:00:00', '清华大学大礼堂', 1, 1);
 INSERT INTO report(title, speaker, time, location, cid, sid) VALUES ('从预训练人工神经网络构建脉冲神经网络', '顾实', '2021-04-23 10:00:00', '北京大学理科二号楼2735', 1, 1);
@@ -67,10 +67,10 @@ insert into report(title, speaker, time, location, cid, sid) values('智能信�
 -- ----------------------------
 DROP TABLE IF EXISTS `city`;
 CREATE TABLE `city`(
-  `id` int(11) not null AUTO_INCREMENT COMMENT '城市id',
+  `id` int(11) not null auto_increment COMMENT '城市id',
   `name` varchar(255)  not null COMMENT '城市名称',
-  primary key (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+  primary key (`id`)
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `city`(name) VALUES ('北京');
 INSERT INTO `city`(name) VALUES ('成都');
@@ -106,24 +106,23 @@ INSERT INTO `city`(name) VALUES ('厦门');
 -- ----------------------------
 DROP TABLE IF EXISTS `subject`;
 CREATE TABLE `subject` (
-  `id` int(11) not null AUTO_INCREMENT COMMENT '学科id',
+  `id` int(11) not null auto_increment COMMENT '学科id',
   `name` varchar(255) not null COMMENT '学科名称',
-  `parent` int(11) default 0 COMMENT '为0表示一级学科，不为0表示所属一级学科id',
-  primary key (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+  primary key (`id`)
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `subject`(name, parent) VALUES ('人工智能', 0);
-INSERT INTO `subject`(name, parent) VALUES ('计算机系统', 0);
-INSERT INTO `subject`(name, parent) VALUES ('机器学习', 1);
-INSERT INTO `subject`(name, parent) VALUES ('数据挖掘', 1);
-INSERT INTO `subject`(name, parent) VALUES ('计算机视觉', 1);
-INSERT INTO `subject`(name, parent) VALUES ('自然语言处理', 1);
-INSERT INTO `subject`(name, parent) VALUES ('智能推荐', 1);
-INSERT INTO `subject`(name, parent) VALUES ('计算机体系结构', 2);
-INSERT INTO `subject`(name, parent) VALUES ('操作系统', 2);
-INSERT INTO `subject`(name, parent) VALUES ('计算机网络', 2);
-INSERT INTO `subject`(name, parent) VALUES ('数据库', 2);
-INSERT INTO `subject`(name, parent) VALUES ('嵌入式系统', 2);
+INSERT INTO `subject`(name) VALUES ('人工智能');
+INSERT INTO `subject`(name) VALUES ('计算机系统');
+INSERT INTO `subject`(name) VALUES ('机器学习');
+INSERT INTO `subject`(name) VALUES ('数据挖掘');
+INSERT INTO `subject`(name) VALUES ('计算机视觉');
+INSERT INTO `subject`(name) VALUES ('自然语言处理');
+INSERT INTO `subject`(name) VALUES ('智能推荐');
+INSERT INTO `subject`(name) VALUES ('计算机体系结构');
+INSERT INTO `subject`(name) VALUES ('操作系统');
+INSERT INTO `subject`(name) VALUES ('计算机网络');
+INSERT INTO `subject`(name) VALUES ('数据库');
+INSERT INTO `subject`(name) VALUES ('嵌入式系统');
 
 
 -- ----------------------------
@@ -131,12 +130,12 @@ INSERT INTO `subject`(name, parent) VALUES ('嵌入式系统', 2);
 -- ----------------------------
 DROP TABLE IF EXISTS `user_city`;
 CREATE TABLE `user_city` (
-  `id` int(11) not null AUTO_INCREMENT COMMENT '用户关注城市id',
+  `id` int(11) not null auto_increment COMMENT '用户关注城市id',
   `uid` int(11) not null COMMENT '用户id',
   `cid` int(11) not null COMMENT '城市id',
-  primary key (`id`) USING BTREE,
+  primary key (`id`),
   unique key idx_uid_cid(`uid`,`cid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 insert into `user_city`(uid, cid) values(1, 1);
 insert into `user_city`(uid, cid) values(1, 3);
@@ -149,12 +148,12 @@ insert into `user_city`(uid, cid) values(2, 4);
 -- ----------------------------
 DROP TABLE IF EXISTS `user_subject`;
 CREATE TABLE `user_subject` (
-  `id` int(11) not null AUTO_INCREMENT COMMENT '用户关注学科id',
+  `id` int(11) not null auto_increment COMMENT '用户关注学科id',
   `uid` int(11) not null COMMENT '用户id',
   `sid` int(11) not null COMMENT '学科id',
-  primary key (`id`) USING BTREE,
+  primary key (`id`),
   unique key idx_uid_sid(`uid`,`sid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 insert into `user_subject`(uid, sid) values(1, 1);
 insert into `user_subject`(uid, sid) values(1, 2);
@@ -166,12 +165,12 @@ insert into `user_subject`(uid, sid) values(2, 4);
 -- ----------------------------
 DROP TABLE IF EXISTS `user_report`;
 CREATE TABLE `user_report`  (
-  `id` int(11) not null AUTO_INCREMENT COMMENT '用户收藏报告id',
+  `id` int(11) not null auto_increment COMMENT '用户收藏报告id',
   `uid` int(11) not null COMMENT '用户id',
   `rid` int(11) not null COMMENT '报告id',
-  primary key (`id`) USING BTREE,
+  primary key (`id`),
   unique key idx_uid_rid(`uid`,`rid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci;
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 insert into `user_report`(uid, rid) values(1, 1);
 insert into `user_report`(uid, rid) values(1, 2);

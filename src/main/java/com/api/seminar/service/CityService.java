@@ -14,6 +14,6 @@ public class CityService {
     private CityMapper cityMapper;
 
     public List<City> listCity() {
-        return cityMapper.listCity();
+        return cityMapper.findAll();
     }
 }

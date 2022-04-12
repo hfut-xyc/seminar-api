@@ -1,6 +1,6 @@
-package com.api.seminar.exception;
+package com.api.seminar.advice;
 
-import com.api.seminar.dto.CommonResponse;
+import com.api.seminar.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestControllerAdvice
-public class CommonExceptionAdvice {
+public class GlobalExceptionAdvice {
 
     @ExceptionHandler(Exception.class)
-    public CommonResponse handleException(HttpServletRequest request, Exception e) {
+    public ResultVO<String> handleException(HttpServletRequest request, Exception e) {
+        ResultVO<String> result = new ResultVO<>(-1, e.getMessage(), null);
         log.error("{}: {}", request.getRequestURI(), e.getMessage());
-        return CommonResponse.error(e.getMessage());
+        return result;
     }
 }

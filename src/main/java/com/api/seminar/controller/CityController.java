@@ -1,6 +1,5 @@
 package com.api.seminar.controller;
 
-import com.api.seminar.dto.CommonResponse;
 import com.api.seminar.entity.City;
 import com.api.seminar.service.CityService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +15,8 @@ public class CityController {
     private CityService cityService;
 
     @GetMapping("/city/list")
-    public CommonResponse<List<City>> listCity() {
-        List<City> cityList = cityService.listCity();
-        return CommonResponse.success("加载成功", cityList);
+    public List<City> findAll() {
+        return cityService.listCity();
     }
 }
 

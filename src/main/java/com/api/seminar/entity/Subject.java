@@ -2,7 +2,7 @@ package com.api.seminar.entity;
 
 import lombok.Data;
 
-import java.util.List;
+import java.util.Date;
 
 @Data
 public class Subject {
@@ -11,7 +11,7 @@ public class Subject {
 
     private String name;
 
-    private Integer parent;
+    private Date createTime;
 
-    private List<Subject> children;
+    private Date updateTime;
 }
